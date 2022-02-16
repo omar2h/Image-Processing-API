@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "lint": "eslint \"src/**/*.ts\"",
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write",
-    "start": "nodemon index.ts",
+    "start": "npx nodemon src/index.ts",
     "test": "npx tsc && jasmine"
   },
   "author": "Omar Hesham",
