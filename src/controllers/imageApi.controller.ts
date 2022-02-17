@@ -1,6 +1,7 @@
 import sharp from 'sharp'
 
-const resizeImage = async () => {
+const resizeImage = async (filename: string, width: number, height: number) => {
+  //await checkImageExist(filename, width, height)
   try {
     await sharp('images/full/fjord.jpg')
       .resize({
