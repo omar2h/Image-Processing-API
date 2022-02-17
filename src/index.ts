@@ -1,6 +1,5 @@
 import express from 'express'
 import imagesApiRouter from './routes/imageApi.routes'
-import resizeImage from './resizeImg'
 
 const app = express()
 

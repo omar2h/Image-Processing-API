@@ -12,7 +12,7 @@ router.use(validateInput(), checkError, (req: Request, res: Response) => {
   const width: number = parseInt(req.query.width as string)
   const height: number = parseInt(req.query.height as string)
   resizeImage(filename, width, height)
-  res.send(`${filename}, ${width}, ${height}`)
+  res.send(__dirname)
 })
 
 export default router
