@@ -11,14 +11,18 @@ const checkImageExist = async (
   return fs.pathExists(`${imagePath}/${filename}_${width}_${height}.jpg`)
 }
 
-const resizeImage = async (filename: string, width: number, height: number) => {
+const resizeImage = async (
+  filename: string,
+  width: number,
+  height: number
+): Promise<string | undefined> => {
   const imagePath = path.resolve(__dirname, `../../images/full/${filename}.jpg`)
   const imageOutPath = path.resolve(
     __dirname,
     `../../images/thumb/${filename}_${width}_${height}.jpg`
   )
   const ifImageExist: boolean = await checkImageExist(filename, width, height)
-  if (ifImageExist) return
+  if (ifImageExist) return imageOutPath
   try {
     await sharp(imagePath)
       .resize({
@@ -26,6 +30,7 @@ const resizeImage = async (filename: string, width: number, height: number) => {
         height: height,
       })
       .toFile(imageOutPath)
+    return imageOutPath
   } catch (error) {
     console.log(error)
   }
