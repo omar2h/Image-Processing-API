@@ -35,7 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var fs_extra_1 = __importDefault(require("fs-extra"));
+var path_1 = __importDefault(require("path"));
 var imageApi_controller_1 = require("../controllers/imageApi.controller");
 describe('Test checkImageExist func - to find if image exists', function () {
     it('expect checkIfImagesExist function defined ', function () {
@@ -53,4 +58,26 @@ describe('Test checkImageExist func - to find if image exists', function () {
             }
         });
     }); });
+});
+describe('Test resizeImage func', function () {
+    it('expect resizeImage function defined ', function () {
+        expect(imageApi_controller_1.resizeImage).toBeDefined();
+    });
+    it('test resizeImage func - to return image output path ', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var imageOutPath, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    imageOutPath = path_1.default.resolve(__dirname, "../../images/thumb/fjord_100_200.jpg");
+                    _a = expect;
+                    return [4 /*yield*/, (0, imageApi_controller_1.resizeImage)('fjord', 100, 200)];
+                case 1:
+                    _a.apply(void 0, [_b.sent()]).toBe(imageOutPath);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it('Resized image should exist in thumb folder', function () {
+        expect(fs_extra_1.default.existsSync("".concat(path_1.default.resolve(__dirname, '../../images/thumb'), "/fjord_100_200.jpg"))).toBeTruthy();
+    });
 });

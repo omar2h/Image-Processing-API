@@ -59,8 +59,10 @@ var resizeImage = function (filename, width, height) { return __awaiter(void 0, 
                 imagePath = path_1.default.resolve(__dirname, "../../images/full/".concat(filename, ".jpg"));
                 imageOutPathDir = path_1.default.resolve(__dirname, "../../images/thumb");
                 imageOutPath = path_1.default.resolve(__dirname, "../../images/thumb/".concat(filename, "_").concat(width, "_").concat(height, ".jpg"));
+                // ensure dir exists if not create it
                 return [4 /*yield*/, fs_extra_1.default.ensureDir(imageOutPathDir)];
             case 1:
+                // ensure dir exists if not create it
                 _a.sent();
                 return [4 /*yield*/, checkImageExist(filename, width, height)];
             case 2:
