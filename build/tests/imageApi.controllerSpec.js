@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var imageApi_controller_1 = require("../controllers/imageApi.controller");
-describe('Test checkImageExist func to find if image exists', function () {
+describe('Test checkImageExist func - to find if image exists', function () {
     it('expect checkIfImagesExist function defined ', function () {
         expect(imageApi_controller_1.checkImageExist).toBeDefined();
     });

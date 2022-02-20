@@ -1,16 +1,19 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkError = exports.validateInput = void 0;
 var express_validator_1 = require("express-validator");
-var images_1 = __importDefault(require("../images"));
+var IMAGES = [
+    'fjord',
+    'encenadaport',
+    'icelandwaterfall',
+    'palmtunnel',
+    'santamonica',
+];
 var validateInput = function () { return [
     (0, express_validator_1.query)('filename')
         .notEmpty()
         .withMessage('Filename is missing')
-        .isIn(images_1.default)
+        .isIn(IMAGES)
         .withMessage('Image is not found'),
     (0, express_validator_1.query)('width')
         .notEmpty()
