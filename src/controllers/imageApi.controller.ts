@@ -17,10 +17,13 @@ const resizeImage = async (
   height: number
 ): Promise<string | undefined> => {
   const imagePath = path.resolve(__dirname, `../../images/full/${filename}.jpg`)
+  const imageOutPathDir = path.resolve(__dirname, `../../images/thumb`)
   const imageOutPath = path.resolve(
     __dirname,
     `../../images/thumb/${filename}_${width}_${height}.jpg`
   )
+  // ensure dir exists if not create it
+  await fs.ensureDir(imageOutPathDir)
   const ifImageExist: boolean = await checkImageExist(filename, width, height)
   if (ifImageExist) return imageOutPath
   try {

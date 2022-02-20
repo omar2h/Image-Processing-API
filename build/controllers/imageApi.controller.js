@@ -52,34 +52,38 @@ var checkImageExist = function (filename, width, height) { return __awaiter(void
 }); };
 exports.checkImageExist = checkImageExist;
 var resizeImage = function (filename, width, height) { return __awaiter(void 0, void 0, void 0, function () {
-    var imagePath, imageOutPath, ifImageExist, error_1;
+    var imagePath, imageOutPathDir, imageOutPath, ifImageExist, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 imagePath = path_1.default.resolve(__dirname, "../../images/full/".concat(filename, ".jpg"));
+                imageOutPathDir = path_1.default.resolve(__dirname, "../../images/thumb");
                 imageOutPath = path_1.default.resolve(__dirname, "../../images/thumb/".concat(filename, "_").concat(width, "_").concat(height, ".jpg"));
-                return [4 /*yield*/, checkImageExist(filename, width, height)];
+                return [4 /*yield*/, fs_extra_1.default.ensureDir(imageOutPathDir)];
             case 1:
+                _a.sent();
+                return [4 /*yield*/, checkImageExist(filename, width, height)];
+            case 2:
                 ifImageExist = _a.sent();
                 if (ifImageExist)
                     return [2 /*return*/, imageOutPath];
-                _a.label = 2;
-            case 2:
-                _a.trys.push([2, 4, , 5]);
+                _a.label = 3;
+            case 3:
+                _a.trys.push([3, 5, , 6]);
                 return [4 /*yield*/, (0, sharp_1.default)(imagePath)
                         .resize({
                         width: width,
                         height: height,
                     })
                         .toFile(imageOutPath)];
-            case 3:
+            case 4:
                 _a.sent();
                 return [2 /*return*/, imageOutPath];
-            case 4:
+            case 5:
                 error_1 = _a.sent();
                 console.log(error_1);
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); };
