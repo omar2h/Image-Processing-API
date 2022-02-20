@@ -51,6 +51,7 @@ router.use((0, validateInput_middleware_1.validateInput)(), validateInput_middle
                 return [4 /*yield*/, (0, imageApi_controller_1.resizeImage)(filename, width, height)];
             case 1:
                 imagePath = (_a.sent());
+                // to display image on browser
                 res.sendFile(imagePath);
                 return [2 /*return*/];
         }

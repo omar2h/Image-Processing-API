@@ -26,7 +26,10 @@
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "jasmine": "^4.0.2",
+    "jasmine-spec-reporter": "^7.0.0",
     "prettier": "2.5.1",
+    "supertest": "^6.2.2",
     "ts-node": "^10.5.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.5"
@@ -35,9 +38,6 @@
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
     "fs-extra": "^10.0.0",
-    "jasmine": "^4.0.2",
-    "jasmine-spec-reporter": "^7.0.0",
-    "sharp": "^0.30.1",
-    "supertest": "^6.2.2"
+    "sharp": "^0.30.1"
   }
 }
