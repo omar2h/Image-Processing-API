@@ -39,25 +39,48 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var supertest_1 = __importDefault(require("supertest"));
-var fs_1 = __importDefault(require("fs"));
+exports.checkImageExist = exports.resizeImage = void 0;
+var sharp_1 = __importDefault(require("sharp"));
 var path_1 = __importDefault(require("path"));
-var index_1 = __importDefault(require("../index"));
-var request = (0, supertest_1.default)(index_1.default);
-describe('Test endpoint responses', function () {
-    it('gets the /api/images endpoint to resize image', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var response;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/images?filename=fjord&width=100&height=200')];
-                case 1:
-                    response = _a.sent();
-                    expect(response.status).toBe(200);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('Resized image should exist in thumb folder', function () {
-        expect(fs_1.default.existsSync("".concat(path_1.default.resolve(__dirname, '../../images/thumb'), "/fjord_100_200.jpg"))).toBeTruthy();
+var fs_extra_1 = __importDefault(require("fs-extra"));
+var checkImageExist = function (filename, width, height) { return __awaiter(void 0, void 0, void 0, function () {
+    var imagePath;
+    return __generator(this, function (_a) {
+        imagePath = path_1.default.resolve(__dirname, '../../images/thumb');
+        return [2 /*return*/, fs_extra_1.default.pathExists("".concat(imagePath, "/").concat(filename, "_").concat(width, "_").concat(height, ".jpg"))];
     });
-});
+}); };
+exports.checkImageExist = checkImageExist;
+var resizeImage = function (filename, width, height) { return __awaiter(void 0, void 0, void 0, function () {
+    var imagePath, imageOutPath, ifImageExist, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                imagePath = path_1.default.resolve(__dirname, "../../images/full/".concat(filename, ".jpg"));
+                imageOutPath = path_1.default.resolve(__dirname, "../../images/thumb/".concat(filename, "_").concat(width, "_").concat(height, ".jpg"));
+                return [4 /*yield*/, checkImageExist(filename, width, height)];
+            case 1:
+                ifImageExist = _a.sent();
+                if (ifImageExist)
+                    return [2 /*return*/, imageOutPath];
+                _a.label = 2;
+            case 2:
+                _a.trys.push([2, 4, , 5]);
+                return [4 /*yield*/, (0, sharp_1.default)(imagePath)
+                        .resize({
+                        width: width,
+                        height: height,
+                    })
+                        .toFile(imageOutPath)];
+            case 3:
+                _a.sent();
+                return [2 /*return*/, imageOutPath];
+            case 4:
+                error_1 = _a.sent();
+                console.log(error_1);
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
+        }
+    });
+}); };
+exports.resizeImage = resizeImage;

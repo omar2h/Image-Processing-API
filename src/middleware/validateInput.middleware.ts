@@ -1,12 +1,19 @@
 import { Response, Request, NextFunction } from 'express'
 import { query, ValidationError, validationResult } from 'express-validator'
-import images from '../images'
+
+const IMAGES = [
+  'fjord',
+  'encenadaport',
+  'icelandwaterfall',
+  'palmtunnel',
+  'santamonica',
+]
 
 const validateInput = () => [
   query('filename')
     .notEmpty()
     .withMessage('Filename is missing')
-    .isIn(images)
+    .isIn(IMAGES)
     .withMessage('Image is not found'),
   query('width')
     .notEmpty()

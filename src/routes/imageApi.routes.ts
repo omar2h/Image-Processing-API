@@ -3,7 +3,7 @@ import {
   validateInput,
   checkError,
 } from '../middleware/validateInput.middleware'
-import resizeImage from '../controllers/imageApi.controller'
+import { resizeImage } from '../controllers/imageApi.controller'
 
 const router = Router()
 

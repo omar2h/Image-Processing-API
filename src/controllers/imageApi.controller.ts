@@ -36,4 +36,4 @@ const resizeImage = async (
   }
 }
 
-export default resizeImage
+export { resizeImage, checkImageExist }

@@ -35,29 +35,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var supertest_1 = __importDefault(require("supertest"));
-var fs_1 = __importDefault(require("fs"));
-var path_1 = __importDefault(require("path"));
-var index_1 = __importDefault(require("../index"));
-var request = (0, supertest_1.default)(index_1.default);
-describe('Test endpoint responses', function () {
-    it('gets the /api/images endpoint to resize image', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var response;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/images?filename=fjord&width=100&height=200')];
-                case 1:
-                    response = _a.sent();
-                    expect(response.status).toBe(200);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('Resized image should exist in thumb folder', function () {
-        expect(fs_1.default.existsSync("".concat(path_1.default.resolve(__dirname, '../../images/thumb'), "/fjord_100_200.jpg"))).toBeTruthy();
+var express_1 = require("express");
+var validateInput_middleware_1 = require("../middleware/validateInput.middleware");
+var imageApi_controller_1 = require("../controllers/imageApi.controller");
+var router = (0, express_1.Router)();
+router.use((0, validateInput_middleware_1.validateInput)(), validateInput_middleware_1.checkError, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var filename, width, height, imagePath;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                filename = req.query.filename;
+                width = parseInt(req.query.width);
+                height = parseInt(req.query.height);
+                return [4 /*yield*/, (0, imageApi_controller_1.resizeImage)(filename, width, height)];
+            case 1:
+                imagePath = (_a.sent());
+                res.sendFile(imagePath);
+                return [2 /*return*/];
+        }
     });
-});
+}); });
+exports.default = router;
