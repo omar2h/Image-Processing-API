@@ -13,6 +13,8 @@ This is the first project of udacity's advanced full-stack web development nanod
 * **jasmine**
 * **SuperTest**
 * **sharp**
+* **fs-extra**
+* **express-validator**
 ## Build, start and Test
 ### 1. Install all dependencies
 ```
@@ -39,3 +41,10 @@ As an example:
 ```
 http://localhost:3000/api/images?filename=fjord&width=100&height=200
 ```
+## Resources
+[A better Project structure](https://medium.com/codechef-vit/a-better-project-structure-with-express-and-node-js-c23abc2d736f)
+
+[fs-extra](https://github.com/jprichardson/node-fs-extra/tree/7edcb16a06e041826af3303f961866bf3b243dae)
+
+[express-validator](https://express-validator.github.io/docs/check-api.html)
+
