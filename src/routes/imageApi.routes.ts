@@ -16,6 +16,7 @@ router.use(validateInput(), checkError, async (req: Request, res: Response) => {
     width,
     height
   )) as string
+  // to display image on browser
   res.sendFile(imagePath)
 })
 
